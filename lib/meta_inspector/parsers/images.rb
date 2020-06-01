@@ -37,7 +37,7 @@ module MetaInspector
         @with_size ||= begin
           img_nodes = parsed.search('//img').select{ |img_node| img_node['data-src'] || img_node['src'] }
           imgs_with_size = img_nodes.map do |img_node|
-            [URL.absolutify(img_node['src'], base_url, normalize: false), img_node['width'], img_node['height']]
+            [URL.absolutify(img_node['data-src'] || data-src['src'], base_url, normalize: false), img_node['width'], img_node['height']]
           end
           imgs_with_size.uniq! { |url, width, height| url }
           if @download_images
